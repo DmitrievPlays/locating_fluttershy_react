@@ -6,7 +6,7 @@
 			"script": "android",
 			"problemMatcher": [],
 			"label": "npm: android",
-			"detail": "react-native run-android"
+			"detail": "react-native run-android --variant=release"
 		}
 	]
 }

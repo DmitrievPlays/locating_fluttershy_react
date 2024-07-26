@@ -3,23 +3,32 @@ import { ViewStyle } from "react-native";
 import { Text } from "react-native-paper";
 
 interface CustomTextLabelProps {
-  adjustsFontSizeToFit: boolean;
-  numberOfLines: number;
-  children: ReactNode;
-  style: ViewStyle
+    adjustsFontSizeToFit: boolean;
+    numberOfLines: number;
+    children: ReactNode;
+    style: ViewStyle;
 }
 
-export const TextLabel: React.FC<CustomTextLabelProps> = ({adjustsFontSizeToFit,
-  numberOfLines,
-  children,
-  style,}) =>
-  (
+export const TextLabel: React.FC<CustomTextLabelProps> = ({
+    adjustsFontSizeToFit,
+    numberOfLines,
+    children,
+    style,
+}) => (
     <Text
-      adjustsFontSizeToFit={adjustsFontSizeToFit}
-      numberOfLines={numberOfLines}
-      style={[{ fontFamily: "comfortaa-bold", fontSize: 56 }, style]}>
+        adjustsFontSizeToFit={adjustsFontSizeToFit}
+        numberOfLines={numberOfLines}
+        style={[
+            {
+                fontFamily: "comfortaa-bold",
+                fontSize: 48,
+                paddingHorizontal: 8,
+            },
+            style,
+        ]}
+    >
         {children}
     </Text>
-  );
+);
 
-  export default TextLabel;
+export default TextLabel;
