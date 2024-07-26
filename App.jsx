@@ -10,15 +10,20 @@ import {
     MD3DarkTheme as DarkTheme,
     PaperProvider,
     Appbar,
+    useTheme,
 } from 'react-native-paper';
+import { Easing, StyleSheet } from 'react-native';
+import DatabaseService from './services/databaseService';
+import LocationService from './services/locationService';
+import RoutesSaverService from './services/routesSaverService';
 
 
 
 const light_theme = {
     ...LightTheme,
-    "roundness": 10,
+    "roundness": 4,
     "colors": {
-        "primary": "rgb(0, 104, 116)",
+        "primary": "rgb(0, 167, 165)",
         "onPrimary": "rgb(255, 255, 255)",
         "primaryContainer": "rgb(151, 240, 255)",
         "onPrimaryContainer": "rgb(0, 31, 36)",
@@ -63,7 +68,7 @@ const light_theme = {
 
 const dark_theme = {
     ...DarkTheme,
-    "roundness": 10,
+    "roundness": 4,
     "colors": {
         "primary": "rgb(79, 216, 235)",
         "onPrimary": "rgb(0, 54, 61)",
@@ -108,26 +113,56 @@ const dark_theme = {
     }
 };
 
+export const styles = StyleSheet.create({
+    container: {
+      backgroundColor: 'lavender',
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    button: {
+        backgroundColor: light_theme.colors.primary
+    },
+    quicksandLight: {
+      fontFamily: 'comfortaa-bold',
+      fontSize: 20,
+    },
+    quicksandRegular: {
+      fontFamily: 'comfortaa-bold',
+      fontSize: 20,
+    },
+    ralewayItalic: {
+      fontFamily: 'Raleway-Italic',
+      fontSize: 20,
+    },
+    ralewayThin: {
+      fontFamily: 'Raleway-ThinItalic',
+      fontSize: 20,
+    },
+  });
 
 const Navigator = createMaterialBottomTabNavigator();
+export const dbService = DatabaseService.getInstance();
+export const locationService = LocationService.getInstance();
+export const routesSaverService = RoutesSaverService.getInstance();
+
 
 
 function App() {
+    dbService.prepareDB();
+    routesSaverService.init();
     return (
         <PaperProvider theme={light_theme}>
-            <SafeAreaProvider>
+            <SafeAreaProvider style={{backgroundColor: useTheme().colors.background}}>
                 <NavigationContainer>
                     <Appbar.Header mode="center-aligned">
-                        <Appbar.Content title="Locating Fluttershy"></Appbar.Content>
+                        <Appbar.Content title="Locating Fluttershy" titleStyle={{fontFamily:"comfortaa-bold", fontSize: 26}}></Appbar.Content>
                     </Appbar.Header>
-                    <Navigator.Navigator inactiveColor='#ffffffbb' activeColor='#ffffffbb' barStyle={{
-                        position: "absolute",
-                        right: 6,
-                        left: 6,
-                        bottom: 6,
+                    <Navigator.Navigator sceneAnimationType="shifting" sceneAnimationEasing={Easing.ease} sceneAnimationEnabled={true} inactiveColor='#ffffffbb' activeColor='#ffffffbb' barStyle={{
+                        margin: 8,
                         borderWidth: 2,
                         borderBottomWidth: 4,
-                        borderRadius: 20,
+                        borderRadius: 16,
                         backgroundColor: "#49A4A4",
                         elevation: 10,
                         borderColor: "#00000000",

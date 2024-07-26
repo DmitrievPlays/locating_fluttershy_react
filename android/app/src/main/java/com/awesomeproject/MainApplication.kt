@@ -1,6 +1,8 @@
 package com.awesomeproject
 
 import android.app.Application
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactHost
@@ -32,6 +34,7 @@ class MainApplication : Application(), ReactApplication {
   override val reactHost: ReactHost
     get() = getDefaultReactHost(applicationContext, reactNativeHost)
 
+  @RequiresApi(Build.VERSION_CODES.O)
   override fun onCreate() {
     super.onCreate()
     SoLoader.init(this, false)
